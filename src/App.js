@@ -2,28 +2,23 @@ import React,{useState, useRef, useCallback} from 'react';
 import TodoTemplate from './Components/TodoTemplate';
 import TodoInsert from './Components/TodoInsert';
 import TodoList from './Components/TodoList';
-import styled from 'styled-components';
+
+function createBulkTodos() {
+  const array = [];
+  for(let i=1; i<=2500; i++){
+    array.push({
+      id:i,
+      text: `할 일 ${i}`,
+      checked: false
+    });
+  }
+  return array;
+}
 
 function App() {
-  const [todos, setTodos] = useState([
-    {
-      id:1,
-      text: '5주차_React 기초: 핵심개념, 문법, 간단한 토이프로젝트',
-      checked: true,
-    },
-    {
-      id:2,
-      text: '6주차_React 퍼블리싱',
-      checked: true,
-    },
-    {
-      id:3,
-      text: '7주차_React 응용: 파일구조와 hook',
-      checked: false,
-    },
-  ]);
+  const [todos, setTodos] = useState(createBulkTodos);
 
-  const nextId = useRef(4);
+  const nextId = useRef(2501);
 
   const onInsert = useCallback((text) => {
       const todo = {
