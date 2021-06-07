@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+//import {FullScreen, useFullScreenHandle} from "react-full-screen";
 
 const Template = styled.div`
     width: 512px;
@@ -25,10 +26,14 @@ const Content = styled.div`
 `
 
 const TodoTemplate = ({children}) => {
+    //const handle = useFullScreenHandle();
     return(
         <Template>
+            {/*<button onClick = {handle.enter}>EnterFullScreen</button>
+            <FullScreen handle={handle}>*/}
             <AppTitle>일정관리</AppTitle>
             <Content>{children}</Content>
+            {/*</FullScreen>*/}
         </Template>
     )
 }

@@ -2,16 +2,19 @@ import React from 'react';
 import {MdCheckBoxOutlineBlank, MdCheckBox, MdRemoveCircleOutline} from 'react-icons/md';
 import styled from 'styled-components';
 
-const ListItem = styled.div`
-    padding: 1rem;
-    display: flex;
-    align-items: center;
+const TodoListItemVirtualized = styled.div`
     &:nth-child(even){
         background: #f8f9fa;
     }
     &+&{
         border-top:1px solid #dee2e6;
     }
+`
+
+const ListItem = styled.div`
+    padding: 1rem;
+    display: flex;
+    align-items: center;
 `
 
 const CheckBox = styled.div`
@@ -40,9 +43,10 @@ const Remove = styled.div`
     }
 `
 
-const TodoListItem = ({todo, onRemove, onToggle}) => {
+const TodoListItem = ({todo, onRemove, onToggle, style}) => {
     const {id, text, checked} = todo;
     return(
+        <TodoListItemVirtualized style={style}>
         <ListItem>
             {checked?
                 <CheckBox onClick = {() => onToggle(id)}>
@@ -59,7 +63,8 @@ const TodoListItem = ({todo, onRemove, onToggle}) => {
                 <MdRemoveCircleOutline/>
             </Remove>
         </ListItem>
+        </TodoListItemVirtualized>
     )
 }
 
-export default React.memo(TodoListItem);
+export default React.memo(TodoListItem, (prevProps, nextProps) => prevProps.todo === nextProps.todo);
